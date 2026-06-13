@@ -4,7 +4,7 @@ export default function Navbar() {
       <h2 className="font-semibold">Dashboard</h2>
 
       <div className="text-sm text-gray-400">
-        Mid Defense Project
+        Major  Project
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ export default function Sidebar() {
       </h1>
 
       <div className="flex flex-col gap-4">
+        <Link to="/home">Home</Link>
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/upload">Upload</Link>
         <Link to="/reports">Reports</Link>
