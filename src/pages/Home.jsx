@@ -7,7 +7,7 @@ function Home() {
 
       {/* Header */}
       <div className="bg-white shadow rounded-xl p-6">
-        <h1 className="text-2xl font-bold">Dashboard Home</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Dashboard Home</h1>
         <p className="text-gray-600 mt-1">
           Welcome back! Here’s a quick overview of your system.
         </p>
@@ -18,17 +18,17 @@ function Home() {
 
         <div className="bg-blue-50 p-5 rounded-xl shadow">
           <h2 className="font-semibold text-blue-700">Uploads</h2>
-          <p className="text-2xl font-bold mt-2">12</p>
+          <p className="text-2xl font-bold mt-2 text-blue-900">12</p>
         </div>
 
         <div className="bg-green-50 p-5 rounded-xl shadow">
           <h2 className="font-semibold text-green-700">Reports</h2>
-          <p className="text-2xl font-bold mt-2">5</p>
+          <p className="text-2xl font-bold mt-2 text-green-900">5</p>
         </div>
 
         <div className="bg-purple-50 p-5 rounded-xl shadow">
           <h2 className="font-semibold text-purple-700">System Status</h2>
-          <p className="text-green-600 font-medium mt-2">Active</p>
+          <p className="text-purple-600 font-medium mt-2">Active</p>
         </div>
 
       </div>

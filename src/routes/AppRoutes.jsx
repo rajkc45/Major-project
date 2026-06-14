@@ -11,7 +11,7 @@ import NotFound from "../pages/Notfound";
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/upload" element={<Upload />} />
       <Route path="/reports" element={<Reports />} />
