@@ -30,7 +30,7 @@ export default function SignIn() {
           </div>
           <div className="text-center">
             <h1 className="text-lg font-bold text-white">
-              <span className="gradient-text">Sentinel</span>
+              Binary Analyzer
             </h1>
             <p className="text-xs text-slate-500 mt-0.5">Sign in to your account</p>
           </div>
@@ -91,7 +91,7 @@ export default function SignIn() {
         </div>
 
         <p className="text-center text-[10px] text-slate-700">
-          Sentinel · Binary Analysis Platform · Final Year Project
+          Binary Analysis Platform · Final Year Project
         </p>
       </div>
     </div>

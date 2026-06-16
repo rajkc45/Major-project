@@ -9,7 +9,7 @@ export default function Navbar() {
           <ShieldAlert size={14} className="text-cyan-400" />
         </div>
         <h2 className="text-sm font-semibold text-white tracking-tight">
-          <span className="gradient-text">Sentinel</span>
+          Binary Analyzer
         </h2>
         <span className="hidden sm:inline text-[10px] font-medium text-slate-600 bg-slate-800/60 px-2 py-0.5 rounded-full border border-slate-700/50">
           v0.1 · Final Year Project

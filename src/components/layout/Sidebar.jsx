@@ -23,8 +23,7 @@ export default function Sidebar() {
           <ShieldAlert size={15} className="text-white" />
         </div>
         <div>
-          <span className="text-sm font-bold text-white tracking-tight block leading-tight">Sentinel</span>
-          <span className="text-[9px] text-slate-500 font-medium uppercase tracking-wider">Analyzer</span>
+          <span className="text-sm font-bold text-white tracking-tight block leading-tight">Binary Analyzer</span>
         </div>
       </div>
 
