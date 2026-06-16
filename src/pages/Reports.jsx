@@ -36,12 +36,12 @@ export default function Reports() {
   });
 
   return (
-    <div className="min-h-screen bg-[#080c10] p-6 space-y-6">
+    <div className="min-h-screen p-6 space-y-6">
 
       {/* Header */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6 flex items-center justify-between">
+      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6 flex items-center justify-between card-glow card-glow-violet">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-violet-500/10 ring-1 ring-violet-500/30 flex items-center justify-center">
             <ShieldAlert size={16} className="text-violet-400" />
           </div>
           <div>
@@ -50,7 +50,7 @@ export default function Reports() {
           </div>
         </div>
         <div className="text-right">
-          <p className="text-2xl font-bold text-white font-mono">{REPORTS.length}</p>
+          <p className="text-2xl font-bold text-white font-mono tracking-tight">{REPORTS.length}</p>
           <p className="text-xs text-slate-500">total reports</p>
         </div>
       </div>
@@ -63,7 +63,7 @@ export default function Reports() {
             placeholder="Search binary name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-[#0d1117] ring-1 ring-slate-800 pl-8 pr-3 py-2 rounded-lg text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-cyan-500/40"
+            className="w-full bg-[#0d1117] ring-1 ring-slate-800 pl-8 pr-3 py-2 rounded-lg text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-cyan-500/40 transition-all duration-200"
           />
         </div>
 
@@ -72,9 +72,9 @@ export default function Reports() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ring-1
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all duration-200 ring-1
                 ${filter === f
-                  ? "bg-cyan-500/10 ring-cyan-500/40 text-cyan-300"
+                  ? "bg-cyan-500/10 ring-cyan-500/40 text-cyan-300 shadow-[0_0_8px_-4px_rgba(6,182,212,0.3)]"
                   : "ring-slate-800 text-slate-500 hover:ring-slate-600 hover:text-slate-300"
                 }`}
             >
@@ -92,7 +92,7 @@ export default function Reports() {
             <p className="text-slate-500 text-sm">No reports match your search</p>
           </div>
         ) : (
-          filtered.map((r) => {
+          filtered.map((r, idx) => {
             const { label, cls, Icon } = statusMeta[r.status];
             const scoreColor =
               r.score > 75 ? "text-rose-400" :
@@ -103,31 +103,27 @@ export default function Reports() {
               <div
                 key={r.id}
                 onClick={() => navigate(`/report/${r.id}`)}
-                className="bg-[#0d1117] ring-1 ring-slate-800 rounded-xl px-5 py-4 flex items-center gap-4 hover:ring-cyan-500/30 hover:bg-slate-800/20 transition-all cursor-pointer group"
+                className="bg-[#0d1117] ring-1 ring-slate-800 rounded-xl px-5 py-4 flex items-center gap-4 hover:ring-cyan-500/30 hover:bg-slate-800/20 transition-all duration-200 cursor-pointer group"
+                style={{ animationDelay: `${idx * 0.04}s` }}
               >
-                {/* Icon */}
-                <div className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center shrink-0 group-hover:bg-slate-700 transition-colors">
                   <FileCode2 size={15} className="text-slate-400" />
                 </div>
 
-                {/* Name + meta */}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-slate-200 font-mono truncate group-hover:text-white transition-colors">{r.name}</p>
                   <p className="text-xs text-slate-500 mt-0.5">{r.arch} · {r.time}</p>
                 </div>
 
-                {/* Mode */}
                 <span className={`hidden sm:inline-flex text-[10px] font-semibold px-2 py-0.5 rounded-full ${modeCls[r.mode]}`}>
                   {r.mode}
                 </span>
 
-                {/* Score */}
                 <div className="text-center min-w-[40px]">
                   <p className="text-[10px] text-slate-600">Score</p>
                   <p className={`text-sm font-bold font-mono ${scoreColor}`}>{r.score}</p>
                 </div>
 
-                {/* Status */}
                 <span className={`hidden md:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-full ring-1 ${cls}`}>
                   <Icon size={10} /> {label}
                 </span>

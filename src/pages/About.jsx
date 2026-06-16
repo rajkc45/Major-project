@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Code2, Server, Brain, ShieldAlert, CheckCircle2, AlertTriangle, XCircle, Cpu, Zap, Database } from "lucide-react";
 
 const STACK = [
@@ -39,10 +39,10 @@ const STATUS = [
 ];
 
 const accentCls = {
-  cyan:   { bg: "bg-cyan-500/10",   text: "text-cyan-400",   ring: "ring-cyan-500/30"   },
-  emerald:{ bg: "bg-emerald-500/10",text: "text-emerald-400",ring: "ring-emerald-500/30"},
-  violet: { bg: "bg-violet-500/10", text: "text-violet-400", ring: "ring-violet-500/30" },
-  amber:  { bg: "bg-amber-500/10",  text: "text-amber-400",  ring: "ring-amber-500/30"  },
+  cyan:   { bg: "bg-cyan-500/10",   text: "text-cyan-400",   ring: "ring-cyan-500/30",   glow: "card-glow-cyan"   },
+  emerald:{ bg: "bg-emerald-500/10",text: "text-emerald-400",ring: "ring-emerald-500/30", glow: "card-glow-cyan"   },
+  violet: { bg: "bg-violet-500/10", text: "text-violet-400", ring: "ring-violet-500/30", glow: "card-glow-violet" },
+  amber:  { bg: "bg-amber-500/10",  text: "text-amber-400",  ring: "ring-amber-500/30",  glow: "card-glow-amber"  },
 };
 
 const statusMeta = {
@@ -53,12 +53,12 @@ const statusMeta = {
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-[#080c10] p-6 space-y-6">
+    <div className="min-h-screen p-6 space-y-6">
 
       {/* Header */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6">
+      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6 card-glow card-glow-cyan">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 ring-1 ring-cyan-500/30 flex items-center justify-center">
             <ShieldAlert size={16} className="text-cyan-400" />
           </div>
           <h1 className="text-lg font-bold text-white">About This Project</h1>
@@ -72,13 +72,13 @@ export default function About() {
       {/* Tech Stack */}
       <div>
         <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Tech Stack</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 stagger">
           {STACK.map(({ label, icon: Icon, accent, items }) => {
             const a = accentCls[accent];
             return (
-              <div key={label} className={`rounded-xl bg-[#0d1117] ring-1 ${a.ring} p-5 flex flex-col gap-3`}>
+              <div key={label} className={`rounded-xl bg-[#0d1117] ring-1 ${a.ring} p-5 flex flex-col gap-3 card-glow ${a.glow}`}>
                 <div className="flex items-center gap-2">
-                  <div className={`w-7 h-7 rounded-lg ${a.bg} flex items-center justify-center`}>
+                  <div className={`w-7 h-7 rounded-lg ${a.bg} ring-1 ${a.ring} flex items-center justify-center`}>
                     <Icon size={14} className={a.text} />
                   </div>
                   <h3 className="text-sm font-semibold text-white">{label}</h3>
@@ -100,13 +100,13 @@ export default function About() {
       {/* Project Status */}
       <div>
         <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Project Status</h2>
-        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 overflow-hidden">
+        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 overflow-hidden card-glow card-glow-cyan">
           {STATUS.map(({ label, status, note }, i) => {
             const { Icon, cls, bg } = statusMeta[status];
             return (
               <div
                 key={label}
-                className={`flex items-center justify-between px-5 py-3.5 ${i !== STATUS.length - 1 ? "border-b border-slate-800/60" : ""}`}
+                className={`flex items-center justify-between px-5 py-3.5 transition-colors hover:bg-slate-800/20 ${i !== STATUS.length - 1 ? "border-b border-slate-800/60" : ""}`}
               >
                 <div className="flex items-center gap-3">
                   <Cpu size={13} className="text-slate-600" />
@@ -123,7 +123,7 @@ export default function About() {
       </div>
 
       {/* Footer note */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex items-start gap-3">
+      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex items-start gap-3 card-glow card-glow-amber">
         <Zap size={15} className="text-amber-400 mt-0.5 shrink-0" />
         <p className="text-xs text-slate-500 leading-relaxed">
           This platform is under active development as part of a final year university project.

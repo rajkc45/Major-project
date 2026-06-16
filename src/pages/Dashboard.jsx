@@ -40,10 +40,10 @@ const SYSTEM_STATUS = [
 ];
 
 const accentCls = {
-  cyan:   { bg: "bg-cyan-500/10",   text: "text-cyan-400",   ring: "ring-cyan-500/30"   },
-  rose:   { bg: "bg-rose-500/10",   text: "text-rose-400",   ring: "ring-rose-500/30"   },
-  violet: { bg: "bg-violet-500/10", text: "text-violet-400", ring: "ring-violet-500/30" },
-  amber:  { bg: "bg-amber-500/10",  text: "text-amber-400",  ring: "ring-amber-500/30"  },
+  cyan:   { bg: "bg-cyan-500/10",   text: "text-cyan-400",   ring: "ring-cyan-500/30",   cardGlow: "card-glow-cyan"   },
+  rose:   { bg: "bg-rose-500/10",   text: "text-rose-400",   ring: "ring-rose-500/30",   cardGlow: "card-glow-rose"   },
+  violet: { bg: "bg-violet-500/10", text: "text-violet-400", ring: "ring-violet-500/30", cardGlow: "card-glow-violet" },
+  amber:  { bg: "bg-amber-500/10",  text: "text-amber-400",  ring: "ring-amber-500/30",  cardGlow: "card-glow-amber"  },
 };
 
 const statusMeta = {
@@ -72,10 +72,10 @@ function ThreatScorePill({ score }) {
 function StatCard({ label, value, delta, icon: Icon, accent }) {
   const a = accentCls[accent];
   return (
-    <div className={`relative overflow-hidden rounded-xl bg-[#0d1117] ring-1 ${a.ring} p-5 flex flex-col gap-4`}>
-      <div className={`absolute -top-6 -right-6 w-24 h-24 rounded-full blur-2xl opacity-20 ${a.bg}`} />
+    <div className={`relative overflow-hidden rounded-xl bg-[#0d1117] ring-1 ${a.ring} p-5 flex flex-col gap-4 card-glow ${a.cardGlow} group`}>
+      <div className={`absolute -top-6 -right-6 w-24 h-24 rounded-full blur-2xl opacity-20 ${a.bg} group-hover:opacity-40 transition-opacity duration-500`} />
       <div className="flex items-start justify-between">
-        <div className={`p-2 rounded-lg ${a.bg}`}>
+        <div className={`p-2 rounded-lg ${a.bg} ring-1 ${a.ring} group-hover:scale-110 transition-transform duration-200`}>
           <Icon size={18} className={a.text} />
         </div>
         <TrendingUp size={14} className="text-slate-600 mt-1" />
@@ -92,7 +92,7 @@ function StatCard({ label, value, delta, icon: Icon, accent }) {
 function ActivityChart() {
   const max = Math.max(...ACTIVITY);
   return (
-    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4">
+    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4 card-glow card-glow-cyan">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <BarChart3 size={15} className="text-cyan-400" />
@@ -102,9 +102,9 @@ function ActivityChart() {
       </div>
       <div className="flex items-end gap-1.5 h-28">
         {ACTIVITY.map((v, i) => (
-          <div key={i} className="flex-1 flex flex-col items-center gap-1">
+          <div key={i} className="flex-1 flex flex-col items-center gap-1 group/bar">
             <div
-              className="w-full rounded-sm bg-cyan-500/70 hover:bg-cyan-400 transition-colors cursor-default"
+              className="w-full rounded-sm bg-gradient-to-t from-cyan-600 to-cyan-400 hover:to-cyan-300 transition-all duration-200 cursor-default group-hover/bar:shadow-lg group-hover/bar:shadow-cyan-500/30"
               style={{ height: `${(v / max) * 100}%` }}
               title={`${v} binaries`}
             />
@@ -118,7 +118,7 @@ function ActivityChart() {
 
 function ThreatDistribution() {
   return (
-    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4">
+    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4 card-glow card-glow-rose">
       <div className="flex items-center gap-2">
         <ShieldAlert size={15} className="text-rose-400" />
         <h3 className="text-sm font-semibold text-white">Obfuscation Techniques</h3>
@@ -131,7 +131,10 @@ function ThreatDistribution() {
               <span className="text-slate-500">{count} cases</span>
             </div>
             <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
-              <div className="h-full bg-rose-500/70 rounded-full" style={{ width: `${pct}%` }} />
+              <div
+                className="h-full bg-gradient-to-r from-rose-600 to-rose-400 rounded-full transition-all duration-700"
+                style={{ width: `${pct}%` }}
+              />
             </div>
           </div>
         ))}
@@ -142,7 +145,7 @@ function ThreatDistribution() {
 
 function RecentReports() {
   return (
-    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 overflow-hidden">
+    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 overflow-hidden card-glow card-glow-violet">
       <div className="flex items-center justify-between px-5 py-4 border-b border-slate-800">
         <div className="flex items-center gap-2">
           <Activity size={15} className="text-violet-400" />
@@ -157,7 +160,7 @@ function RecentReports() {
           const { label, cls, Icon } = statusMeta[r.status];
           return (
             <div key={r.id} className="flex items-center gap-3 px-5 py-3 hover:bg-slate-800/30 transition-colors cursor-pointer group">
-              <div className="shrink-0 w-8 h-8 rounded-md bg-slate-800 flex items-center justify-center">
+              <div className="shrink-0 w-8 h-8 rounded-md bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
                 <Terminal size={13} className="text-slate-400" />
               </div>
               <div className="flex-1 min-w-0">
@@ -183,7 +186,7 @@ function RecentReports() {
 function SystemStatus() {
   const allOnline = SYSTEM_STATUS.every(s => s.status === "online");
   return (
-    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4">
+    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4 card-glow card-glow-cyan">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Activity size={15} className="text-cyan-400" />
@@ -197,7 +200,7 @@ function SystemStatus() {
         {SYSTEM_STATUS.map(({ label, status, latency }) => {
           const m = systemStatusMeta[status];
           return (
-            <div key={label} className="flex items-center justify-between">
+            <div key={label} className="flex items-center justify-between py-0.5">
               <div className="flex items-center gap-2">
                 <Circle size={7} className={`${m.dot} fill-current`} />
                 <span className="text-xs text-slate-300">{label}</span>
@@ -222,7 +225,7 @@ function AnalysisModeCard() {
     { id: "Agentic",  icon: Brain, desc: "LLM de-obfuscation pipeline" },
   ];
   return (
-    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4">
+    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4 card-glow card-glow-amber">
       <div className="flex items-center gap-2">
         <Zap size={15} className="text-amber-400" />
         <h3 className="text-sm font-semibold text-white">Default Analysis Mode</h3>
@@ -232,9 +235,9 @@ function AnalysisModeCard() {
           <button
             key={id}
             onClick={() => setMode(id)}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ring-1
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-200 ring-1
               ${mode === id
-                ? "bg-violet-500/10 ring-violet-500/40 text-violet-300"
+                ? "bg-violet-500/10 ring-violet-500/40 text-violet-300 shadow-[0_0_12px_-4px_rgba(139,92,246,0.3)]"
                 : "bg-transparent ring-slate-800 text-slate-400 hover:ring-slate-600 hover:text-slate-300"}`}
           >
             <Icon size={15} />
@@ -252,8 +255,8 @@ function AnalysisModeCard() {
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-[#080c10] text-white">
-      <div className="border-b border-slate-800 px-6 py-4 flex items-center justify-between">
+    <div className="min-h-screen text-white">
+      <div className="border-b border-slate-800/60 px-6 py-4 flex items-center justify-between bg-[#0d1117]/30 backdrop-blur-sm">
         <div>
           <h1 className="text-base font-bold text-white tracking-tight">Dashboard</h1>
           <p className="text-xs text-slate-500 mt-0.5">Hybrid Binary Analysis Platform</p>
@@ -261,16 +264,16 @@ export default function Dashboard() {
       </div>
 
       <div className="px-6 py-6 flex flex-col gap-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 stagger">
           {STATS.map((s) => <StatCard key={s.label} {...s} />)}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 stagger">
           <div className="lg:col-span-2"><ActivityChart /></div>
           <ThreatDistribution />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 stagger">
           <div className="lg:col-span-2"><RecentReports /></div>
           <div className="flex flex-col gap-4">
             <SystemStatus />

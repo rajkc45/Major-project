@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Upload as UploadIcon, FileCode2, X, CheckCircle2, AlertTriangle } from "lucide-react";
 
 export default function Upload() {
@@ -27,12 +27,12 @@ export default function Upload() {
   );
 
   return (
-    <div className="min-h-screen bg-[#080c10] p-6 space-y-6">
+    <div className="min-h-screen p-6 space-y-6">
 
       {/* Header */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6">
+      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6 card-glow card-glow-cyan">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 ring-1 ring-cyan-500/30 flex items-center justify-center">
             <UploadIcon size={16} className="text-cyan-400" />
           </div>
           <div>
@@ -47,18 +47,23 @@ export default function Upload() {
         {/* Upload Box */}
         <div className="lg:col-span-2 space-y-4">
           <label
-            className={`rounded-xl border-2 border-dashed transition-colors duration-200 p-12 flex flex-col items-center justify-center cursor-pointer gap-4
-              ${drag ? "border-cyan-500 bg-cyan-500/5" : "border-slate-700 bg-[#0d1117] hover:border-slate-500"}`}
+            className={`rounded-xl border-2 border-dashed transition-all duration-300 p-12 flex flex-col items-center justify-center cursor-pointer gap-4
+              ${drag
+                ? "border-cyan-400 bg-cyan-500/10 shadow-[0_0_30px_-8px_rgba(6,182,212,0.3)]"
+                : "border-slate-700 bg-[#0d1117] hover:border-slate-500 hover:bg-slate-800/30"
+              }`}
             onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
             onDragLeave={() => setDrag(false)}
             onDrop={handleDrop}
           >
             <input type="file" className="hidden" onChange={handleFileChange} />
-            <div className="w-14 h-14 rounded-full bg-cyan-500/10 flex items-center justify-center">
+            <div className="w-14 h-14 rounded-full bg-cyan-500/10 ring-1 ring-cyan-500/30 flex items-center justify-center group-hover:scale-110 transition-transform">
               <UploadIcon size={24} className="text-cyan-400" />
             </div>
             <div className="text-center">
-              <p className="text-sm font-medium text-slate-300">Drop your binary here</p>
+              <p className="text-sm font-medium text-slate-300">
+                {drag ? "Drop it like it's hot" : "Drop your binary here"}
+              </p>
               <p className="text-xs text-slate-500 mt-1">or click to browse</p>
             </div>
             <div className="flex items-center gap-2 mt-2">
@@ -71,7 +76,7 @@ export default function Upload() {
 
           {/* File preview */}
           {file && (
-            <div className={`rounded-xl p-4 flex items-center gap-3 ring-1 ${isValidFile ? "bg-emerald-500/5 ring-emerald-500/20" : "bg-rose-500/5 ring-rose-500/20"}`}>
+            <div className={`rounded-xl p-4 flex items-center gap-3 ring-1 transition-all duration-200 ${isValidFile ? "bg-emerald-500/5 ring-emerald-500/20" : "bg-rose-500/5 ring-rose-500/20"}`}>
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isValidFile ? "bg-emerald-500/10" : "bg-rose-500/10"}`}>
                 <FileCode2 size={15} className={isValidFile ? "text-emerald-400" : "text-rose-400"} />
               </div>
@@ -89,19 +94,17 @@ export default function Upload() {
             </div>
           )}
 
-          {/* Warning for invalid file */}
           {file && !isValidFile && (
             <p className="text-xs text-rose-400 flex items-center gap-1">
               <AlertTriangle size={11} /> Unsupported file type. Please upload a .elf, .bin, .pe or .exe file.
             </p>
           )}
 
-          {/* Submit button */}
           <button
             disabled={!file || !isValidFile}
-            className={`w-full py-3 rounded-xl font-semibold text-sm transition-all
+            className={`w-full py-3 rounded-xl font-semibold text-sm transition-all duration-200
               ${file && isValidFile
-                ? "bg-cyan-500 text-[#080c10] hover:bg-cyan-400"
+                ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-[#080c10] hover:from-cyan-400 hover:to-cyan-500 shadow-lg shadow-cyan-500/20"
                 : "bg-slate-800 text-slate-600 cursor-not-allowed ring-1 ring-slate-700"
               }`}
           >
@@ -110,16 +113,16 @@ export default function Upload() {
         </div>
 
         {/* Analysis Mode selector */}
-        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4 h-fit">
+        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4 h-fit card-glow card-glow-violet">
           <h3 className="text-sm font-semibold text-white">Analysis Mode</h3>
           <div className="flex flex-col gap-2">
             {modes.map(({ id, desc }) => (
               <button
                 key={id}
                 onClick={() => setMode(id)}
-                className={`flex items-center gap-3 px-3 py-3 rounded-lg text-left transition-all ring-1
+                className={`flex items-center gap-3 px-3 py-3 rounded-lg text-left transition-all duration-200 ring-1
                   ${mode === id
-                    ? "bg-violet-500/10 ring-violet-500/40"
+                    ? "bg-violet-500/10 ring-violet-500/40 shadow-[0_0_12px_-4px_rgba(139,92,246,0.3)]"
                     : "bg-transparent ring-slate-800 hover:ring-slate-600"}`}
               >
                 <div className={`w-2 h-2 rounded-full ${mode === id ? "bg-violet-400" : "bg-slate-700"}`} />

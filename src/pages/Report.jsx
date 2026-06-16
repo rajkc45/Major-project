@@ -28,7 +28,7 @@ export default function Report() {
 
   if (!report) {
     return (
-      <div className="min-h-screen bg-[#080c10] flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-3">
           <FileCode2 size={32} className="text-slate-700 mx-auto" />
           <p className="text-slate-400 text-sm">Report not found</p>
@@ -50,7 +50,7 @@ export default function Report() {
     "text-emerald-400";
 
   return (
-    <div className="min-h-screen bg-[#080c10] p-6 space-y-6">
+    <div className="min-h-screen p-6 space-y-6">
 
       {/* Back button */}
       <button
@@ -61,9 +61,9 @@ export default function Report() {
       </button>
 
       {/* Header */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6 flex items-start justify-between">
+      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6 flex items-start justify-between card-glow card-glow-cyan">
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 ring-1 ring-slate-700/50 flex items-center justify-center">
             <FileCode2 size={18} className="text-slate-400" />
           </div>
           <div>
@@ -88,46 +88,46 @@ export default function Report() {
       </div>
 
       {/* Score + Meta */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-2">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 stagger">
+        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-2 card-glow card-glow-rose">
           <div className="flex items-center gap-2">
             <ShieldAlert size={13} className="text-rose-400" />
             <p className="text-xs text-slate-500">Threat Score</p>
           </div>
-          <p className={`text-3xl font-bold font-mono ${scoreColor}`}>{report.score}</p>
+          <p className={`text-3xl font-bold font-mono tracking-tight ${scoreColor}`}>{report.score}</p>
           <p className="text-[10px] text-slate-600">out of 100</p>
         </div>
 
-        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-2">
+        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-2 card-glow card-glow-cyan">
           <div className="flex items-center gap-2">
             <Cpu size={13} className="text-cyan-400" />
             <p className="text-xs text-slate-500">Architecture</p>
           </div>
-          <p className="text-xl font-bold font-mono text-white">{report.arch}</p>
+          <p className="text-xl font-bold font-mono text-white tracking-tight">{report.arch}</p>
           <p className="text-[10px] text-slate-600">target platform</p>
         </div>
 
-        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-2">
+        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-2 card-glow card-glow-violet">
           <div className="flex items-center gap-2">
             <Brain size={13} className="text-violet-400" />
             <p className="text-xs text-slate-500">Analysis Mode</p>
           </div>
-          <p className="text-xl font-bold font-mono text-white">{report.mode}</p>
+          <p className="text-xl font-bold font-mono text-white tracking-tight">{report.mode}</p>
           <p className="text-[10px] text-slate-600">pipeline used</p>
         </div>
 
-        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-2">
+        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-2 card-glow card-glow-amber">
           <div className="flex items-center gap-2">
             <Clock size={13} className="text-amber-400" />
             <p className="text-xs text-slate-500">Analysed</p>
           </div>
-          <p className="text-xl font-bold font-mono text-white">{report.time}</p>
+          <p className="text-xl font-bold font-mono text-white tracking-tight">{report.time}</p>
           <p className="text-[10px] text-slate-600">time ago</p>
         </div>
       </div>
 
-      {/* Assembly output placeholder */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 overflow-hidden">
+      {/* Assembly output */}
+      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 overflow-hidden card-glow card-glow-cyan">
         <div className="flex items-center gap-2 px-5 py-3 border-b border-slate-800">
           <Terminal size={13} className="text-cyan-400" />
           <h2 className="text-sm font-semibold text-white">Disassembly Output</h2>
@@ -143,8 +143,8 @@ export default function Report() {
         </div>
       </div>
 
-      {/* AI Analysis placeholder */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 overflow-hidden">
+      {/* AI Analysis */}
+      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 overflow-hidden card-glow card-glow-violet">
         <div className="flex items-center gap-2 px-5 py-3 border-b border-slate-800">
           <Brain size={13} className="text-violet-400" />
           <h2 className="text-sm font-semibold text-white">AI De-obfuscation Report</h2>
@@ -154,7 +154,7 @@ export default function Report() {
           {["Obfuscation technique detected", "Control flow analysis", "String decryption", "Recommended action"].map((item) => (
             <div key={item} className="flex items-center gap-3">
               <div className="w-full h-3 bg-slate-800 rounded-full overflow-hidden">
-                <div className="h-full w-2/3 bg-violet-500/20 rounded-full animate-pulse" />
+                <div className="h-full w-2/3 bg-gradient-to-r from-violet-600 to-violet-400 rounded-full animate-pulse" />
               </div>
               <span className="text-[10px] text-slate-700 shrink-0 w-40">{item}</span>
             </div>
