@@ -1,15 +1,15 @@
 import { useState } from "react";
 import {
-  FileCode2, ShieldAlert, Activity, Clock, ChevronRight,
+  FileCode2, Activity, Clock, ChevronRight,
   Cpu, Brain, Zap, TrendingUp, AlertTriangle, CheckCircle2,
-  XCircle, BarChart3, Terminal, Circle,
+  XCircle, BarChart3, Terminal, Circle, Shield
 } from "lucide-react";
 
 const STATS = [
-  { label: "Binaries Analysed", value: "1,284", delta: "+12 this week",      icon: FileCode2,   accent: "cyan"   },
-  { label: "Threats Detected",  value: "347",   delta: "27% of total",       icon: ShieldAlert, accent: "rose"   },
-  { label: "Avg. Analysis Time",value: "4.2s",  delta: "−0.8s vs last week", icon: Clock,       accent: "violet" },
-  { label: "Agentic Jobs Run",  value: "89",    delta: "LLM-assisted",       icon: Brain,       accent: "amber"  },
+  { label: "Binaries Analysed", value: "1,284", delta: "+12 this week",      icon: FileCode2,   accent: "coral"   },
+  { label: "Threats Detected",  value: "347",   delta: "27% of total",       icon: Shield, accent: "amber"   },
+  { label: "Avg. Analysis Time",value: "4.2s",  delta: "−0.8s vs last week", icon: Clock,       accent: "teal" },
+  { label: "Agentic Jobs Run",  value: "89",    delta: "LLM-assisted",       icon: Brain,       accent: "lavender"  },
 ];
 
 const RECENT = [
@@ -40,51 +40,48 @@ const SYSTEM_STATUS = [
 ];
 
 const accentCls = {
-  cyan:   { bg: "bg-cyan-500/10",   text: "text-cyan-400",   ring: "ring-cyan-500/30",   cardGlow: "card-glow-cyan"   },
-  rose:   { bg: "bg-rose-500/10",   text: "text-rose-400",   ring: "ring-rose-500/30",   cardGlow: "card-glow-rose"   },
-  violet: { bg: "bg-violet-500/10", text: "text-violet-400", ring: "ring-violet-500/30", cardGlow: "card-glow-violet" },
-  amber:  { bg: "bg-amber-500/10",  text: "text-amber-400",  ring: "ring-amber-500/30",  cardGlow: "card-glow-amber"  },
+  coral:   { bg: "bg-[#fce8e6]",   text: "text-[#e8635a]",   border: "border-[#fce8e6]"   },
+  amber:   { bg: "bg-[#faf0e0]",   text: "text-[#d4944a]",   border: "border-[#faf0e0]"   },
+  teal:    { bg: "bg-[#e4f2f2]",   text: "text-[#4a9e9e]",   border: "border-[#e4f2f2]"   },
+  lavender:{ bg: "bg-[#f0edf7]",   text: "text-[#9b8ec4]",   border: "border-[#f0edf7]"   },
 };
 
 const statusMeta = {
-  critical: { label: "Critical", cls: "bg-rose-500/15 text-rose-400",        Icon: XCircle       },
-  medium:   { label: "Medium",   cls: "bg-amber-500/15 text-amber-400",      Icon: AlertTriangle },
-  clean:    { label: "Clean",    cls: "bg-emerald-500/15 text-emerald-400",  Icon: CheckCircle2  },
+  critical: { label: "Critical", cls: "bg-[#fce8e6] text-[#e8635a]",        Icon: XCircle       },
+  medium:   { label: "Medium",   cls: "bg-[#faf0e0] text-[#d4944a]",        Icon: AlertTriangle },
+  clean:    { label: "Clean",    cls: "bg-[#e4f2f2] text-[#4a9e9e]",        Icon: CheckCircle2  },
 };
 
 const modeMeta = {
-  Agentic:  "bg-violet-500/20 text-violet-300",
-  Enhanced: "bg-cyan-500/20 text-cyan-300",
-  Standard: "bg-slate-500/20 text-slate-300",
+  Agentic:  "bg-[#f0edf7] text-[#9b8ec4]",
+  Enhanced: "bg-[#e4f2f2] text-[#4a9e9e]",
+  Standard: "bg-[#e5e1d8] text-[#787268]",
 };
 
 const systemStatusMeta = {
-  online:   { dot: "bg-emerald-400", text: "text-emerald-400", label: "Online"   },
-  degraded: { dot: "bg-amber-400",   text: "text-amber-400",   label: "Degraded" },
-  offline:  { dot: "bg-rose-400",    text: "text-rose-400",    label: "Offline"  },
+  online:   { dot: "bg-[#4a9e9e]", text: "text-[#4a9e9e]", label: "Online"   },
+  degraded: { dot: "bg-[#d4944a]", text: "text-[#d4944a]", label: "Degraded" },
+  offline:  { dot: "bg-[#e8635a]", text: "text-[#e8635a]", label: "Offline"  },
 };
 
 function ThreatScorePill({ score }) {
-  const color = score >= 75 ? "text-rose-400" : score >= 40 ? "text-amber-400" : "text-emerald-400";
-  return <span className={`font-mono font-bold text-sm tabular-nums ${color}`}>{score}</span>;
+  const color = score >= 75 ? "text-[#e8635a]" : score >= 40 ? "text-[#d4944a]" : "text-[#4a9e9e]";
+  return <span className={`font-bold text-sm tabular-nums ${color}`}>{score}</span>;
 }
 
 function StatCard({ label, value, delta, icon: Icon, accent }) {
   const a = accentCls[accent];
   return (
-    <div className={`relative overflow-hidden rounded-xl bg-[#0d1117] ring-1 ${a.ring} p-5 flex flex-col gap-4 card-glow ${a.cardGlow} group`}>
-      <div className={`absolute -top-6 -right-6 w-24 h-24 rounded-full blur-2xl opacity-20 ${a.bg} group-hover:opacity-40 transition-opacity duration-500`} />
-      <div className="flex items-start justify-between">
-        <div className={`p-2 rounded-lg ${a.bg} ring-1 ${a.ring} group-hover:scale-110 transition-transform duration-200`}>
+    <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6 transition-all duration-200 hover:border-[#c4bfb4] hover:shadow-md hover:-translate-y-0.5">
+      <div className="flex items-start justify-between mb-4">
+        <div className={`w-9 h-9 rounded-xl ${a.bg} flex items-center justify-center`}>
           <Icon size={18} className={a.text} />
         </div>
-        <TrendingUp size={14} className="text-slate-600 mt-1" />
+        <TrendingUp size={14} className="text-[#aba498]" />
       </div>
-      <div>
-        <p className="text-2xl font-bold text-white font-mono tracking-tight">{value}</p>
-        <p className="text-xs text-slate-400 mt-0.5">{label}</p>
-      </div>
-      <p className={`text-xs font-medium ${a.text}`}>{delta}</p>
+      <p className="text-3xl font-bold text-[#2b2824] tracking-tight">{value}</p>
+      <p className="text-sm text-[#787268] mt-0.5">{label}</p>
+      <p className={`text-xs font-medium mt-2 ${a.text}`}>{delta}</p>
     </div>
   );
 }
@@ -92,23 +89,23 @@ function StatCard({ label, value, delta, icon: Icon, accent }) {
 function ActivityChart() {
   const max = Math.max(...ACTIVITY);
   return (
-    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4 card-glow card-glow-cyan">
-      <div className="flex items-center justify-between">
+    <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6">
+      <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
-          <BarChart3 size={15} className="text-cyan-400" />
-          <h3 className="text-sm font-semibold text-white">Analysis Volume</h3>
+          <BarChart3 size={15} className="text-[#4a9e9e]" />
+          <h3 className="text-sm font-semibold text-[#2b2824]">Analysis Volume</h3>
         </div>
-        <span className="text-xs text-slate-500">Last 12 months</span>
+        <span className="text-xs text-[#aba498]">Last 12 months</span>
       </div>
       <div className="flex items-end gap-1.5 h-28">
         {ACTIVITY.map((v, i) => (
-          <div key={i} className="flex-1 flex flex-col items-center gap-1 group/bar">
+          <div key={i} className="flex-1 flex flex-col items-center gap-1 group">
             <div
-              className="w-full rounded-sm bg-gradient-to-t from-cyan-600 to-cyan-400 hover:to-cyan-300 transition-all duration-200 cursor-default group-hover/bar:shadow-lg group-hover/bar:shadow-cyan-500/30"
+              className="w-full rounded-md bg-gradient-to-t from-[#4a9e9e] to-[#7cbfbf] transition-all duration-200 cursor-default"
               style={{ height: `${(v / max) * 100}%` }}
               title={`${v} binaries`}
             />
-            <span className="text-[9px] text-slate-600">{MONTHS[i]}</span>
+            <span className="text-[9px] text-[#aba498]">{MONTHS[i]}</span>
           </div>
         ))}
       </div>
@@ -118,21 +115,21 @@ function ActivityChart() {
 
 function ThreatDistribution() {
   return (
-    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4 card-glow card-glow-rose">
-      <div className="flex items-center gap-2">
-        <ShieldAlert size={15} className="text-rose-400" />
-        <h3 className="text-sm font-semibold text-white">Obfuscation Techniques</h3>
+    <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6">
+      <div className="flex items-center gap-2 mb-5">
+        <Shield size={15} className="text-[#d4944a]" />
+        <h3 className="text-sm font-semibold text-[#2b2824]">Obfuscation Techniques</h3>
       </div>
       <div className="flex flex-col gap-3">
         {THREAT_DIST.map(({ label, count, pct }) => (
           <div key={label} className="flex flex-col gap-1">
             <div className="flex justify-between text-xs">
-              <span className="text-slate-300 font-mono">{label}</span>
-              <span className="text-slate-500">{count} cases</span>
+              <span className="text-[#787268]">{label}</span>
+              <span className="text-[#aba498]">{count} cases</span>
             </div>
-            <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-2 bg-[#e5e1d8] rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-rose-600 to-rose-400 rounded-full transition-all duration-700"
+                className="h-full bg-gradient-to-r from-[#d4944a] to-[#e8b87a] rounded-full transition-all duration-700"
                 style={{ width: `${pct}%` }}
               />
             </div>
@@ -145,27 +142,27 @@ function ThreatDistribution() {
 
 function RecentReports() {
   return (
-    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 overflow-hidden card-glow card-glow-violet">
-      <div className="flex items-center justify-between px-5 py-4 border-b border-slate-800">
+    <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] overflow-hidden">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-[#d1ccc1]">
         <div className="flex items-center gap-2">
-          <Activity size={15} className="text-violet-400" />
-          <h3 className="text-sm font-semibold text-white">Recent Reports</h3>
+          <Activity size={15} className="text-[#9b8ec4]" />
+          <h3 className="text-sm font-semibold text-[#2b2824]">Recent Reports</h3>
         </div>
-        <button className="text-xs text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1">
+        <button className="text-xs text-[#787268] hover:text-[#e8635a] transition-colors flex items-center gap-1">
           View all <ChevronRight size={12} />
         </button>
       </div>
-      <div className="divide-y divide-slate-800/60">
+      <div className="divide-y divide-[#d1ccc1]">
         {RECENT.map((r) => {
           const { label, cls, Icon } = statusMeta[r.status];
           return (
-            <div key={r.id} className="flex items-center gap-3 px-5 py-3 hover:bg-slate-800/30 transition-colors cursor-pointer group">
-              <div className="shrink-0 w-8 h-8 rounded-md bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
-                <Terminal size={13} className="text-slate-400" />
+            <div key={r.id} className="flex items-center gap-3 px-6 py-3.5 hover:bg-[#e2ded6] transition-colors cursor-pointer group">
+              <div className="shrink-0 w-8 h-8 rounded-xl bg-[#e5e1d8] flex items-center justify-center">
+                <Terminal size={13} className="text-[#787268]" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-slate-200 font-mono truncate group-hover:text-white transition-colors">{r.name}</p>
-                <p className="text-xs text-slate-500">{r.arch} · {r.time}</p>
+                <p className="text-sm text-[#2b2824] font-mono truncate">{r.name}</p>
+                <p className="text-xs text-[#aba498]">{r.arch} · {r.time}</p>
               </div>
               <span className={`hidden sm:inline-flex text-[10px] font-semibold px-2 py-0.5 rounded-full ${modeMeta[r.mode]}`}>
                 {r.mode}
@@ -174,7 +171,7 @@ function RecentReports() {
               <span className={`hidden md:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full ${cls}`}>
                 <Icon size={10} />{label}
               </span>
-              <ChevronRight size={13} className="text-slate-600 group-hover:text-slate-400 transition-colors shrink-0" />
+              <ChevronRight size={13} className="text-[#aba498] shrink-0" />
             </div>
           );
         })}
@@ -186,13 +183,13 @@ function RecentReports() {
 function SystemStatus() {
   const allOnline = SYSTEM_STATUS.every(s => s.status === "online");
   return (
-    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4 card-glow card-glow-cyan">
-      <div className="flex items-center justify-between">
+    <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Activity size={15} className="text-cyan-400" />
-          <h3 className="text-sm font-semibold text-white">System Status</h3>
+          <Activity size={15} className="text-[#4a9e9e]" />
+          <h3 className="text-sm font-semibold text-[#2b2824]">System Status</h3>
         </div>
-        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${allOnline ? "bg-emerald-500/15 text-emerald-400" : "bg-amber-500/15 text-amber-400"}`}>
+        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${allOnline ? "bg-[#e4f2f2] text-[#4a9e9e]" : "bg-[#faf0e0] text-[#d4944a]"}`}>
           {allOnline ? "All Systems Go" : "Degraded"}
         </span>
       </div>
@@ -203,10 +200,10 @@ function SystemStatus() {
             <div key={label} className="flex items-center justify-between py-0.5">
               <div className="flex items-center gap-2">
                 <Circle size={7} className={`${m.dot} fill-current`} />
-                <span className="text-xs text-slate-300">{label}</span>
+                <span className="text-xs text-[#787268]">{label}</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono text-slate-500">{latency}</span>
+                <span className="text-[10px] font-mono text-[#aba498]">{latency}</span>
                 <span className={`text-[10px] font-semibold ${m.text}`}>{m.label}</span>
               </div>
             </div>
@@ -225,27 +222,27 @@ function AnalysisModeCard() {
     { id: "Agentic",  icon: Brain, desc: "LLM de-obfuscation pipeline" },
   ];
   return (
-    <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4 card-glow card-glow-amber">
-      <div className="flex items-center gap-2">
-        <Zap size={15} className="text-amber-400" />
-        <h3 className="text-sm font-semibold text-white">Default Analysis Mode</h3>
+    <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6">
+      <div className="flex items-center gap-2 mb-4">
+        <Zap size={15} className="text-[#d4944a]" />
+        <h3 className="text-sm font-semibold text-[#2b2824]">Default Analysis Mode</h3>
       </div>
       <div className="flex flex-col gap-2">
         {modes.map(({ id, icon: Icon, desc }) => (
           <button
             key={id}
             onClick={() => setMode(id)}
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-200 ring-1
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-200
               ${mode === id
-                ? "bg-violet-500/10 ring-violet-500/40 text-violet-300 shadow-[0_0_12px_-4px_rgba(139,92,246,0.3)]"
-                : "bg-transparent ring-slate-800 text-slate-400 hover:ring-slate-600 hover:text-slate-300"}`}
+                ? "bg-[#f0edf7] text-[#9b8ec4]"
+                : "bg-transparent text-[#787268] hover:bg-[#e5e1d8]"}`}
           >
             <Icon size={15} />
             <div>
               <p className="text-xs font-semibold">{id}</p>
               <p className="text-[10px] opacity-60">{desc}</p>
             </div>
-            {mode === id && <CheckCircle2 size={13} className="ml-auto text-violet-400" />}
+            {mode === id && <CheckCircle2 size={13} className="ml-auto text-[#9b8ec4]" />}
           </button>
         ))}
       </div>
@@ -255,30 +252,30 @@ function AnalysisModeCard() {
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen text-white">
-      <div className="border-b border-slate-800/60 px-6 py-4 flex items-center justify-between bg-[#0d1117]/30 backdrop-blur-sm">
-        <div>
-          <h1 className="text-base font-bold text-white tracking-tight">Dashboard</h1>
-          <p className="text-xs text-slate-500 mt-0.5">Hybrid Binary Analysis Platform</p>
-        </div>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6 blob-deco">
+        <h1 className="text-xl font-bold text-[#2b2824]">Dashboard</h1>
+        <p className="text-sm text-[#787268] mt-0.5">Hybrid Binary Analysis Platform</p>
       </div>
 
-      <div className="px-6 py-6 flex flex-col gap-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 stagger">
-          {STATS.map((s) => <StatCard key={s.label} {...s} />)}
-        </div>
+      {/* Stats */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 stagger">
+        {STATS.map((s) => <StatCard key={s.label} {...s} />)}
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 stagger">
-          <div className="lg:col-span-2"><ActivityChart /></div>
-          <ThreatDistribution />
-        </div>
+      {/* Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 stagger">
+        <div className="lg:col-span-2"><ActivityChart /></div>
+        <ThreatDistribution />
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 stagger">
-          <div className="lg:col-span-2"><RecentReports /></div>
-          <div className="flex flex-col gap-4">
-            <SystemStatus />
-            <AnalysisModeCard />
-          </div>
+      {/* Bottom */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 stagger">
+        <div className="lg:col-span-2"><RecentReports /></div>
+        <div className="flex flex-col gap-4">
+          <SystemStatus />
+          <AnalysisModeCard />
         </div>
       </div>
     </div>

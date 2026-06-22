@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import {
-  Home, LayoutDashboard, Upload, FileText, Info, ShieldAlert, LogIn,
+  Home, LayoutDashboard, Upload, FileText, Info,
 } from "lucide-react";
 
 const links = [
@@ -15,16 +15,13 @@ export default function Sidebar() {
   const navigate = useNavigate();
 
   return (
-    <aside className="w-52 min-h-screen bg-[#0d1117]/90 backdrop-blur-xl border-r border-slate-800/60 flex flex-col fixed top-0 left-0 z-20">
-
+    <aside className="w-52 min-h-screen bg-[#f0ede7]/90 backdrop-blur-xl border-r border-[#d1ccc1] flex flex-col fixed top-0 left-0 z-20">
       {/* Brand */}
-      <div className="flex items-center gap-2.5 px-4 py-5 border-b border-slate-800/60">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-cyan-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 ring-1 ring-cyan-400/30">
-          <ShieldAlert size={15} className="text-white" />
+      <div className="flex items-center gap-2.5 px-4 py-5 border-b border-[#d1ccc1]">
+        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#e8635a] to-[#d4944a] flex items-center justify-center shadow-sm">
+          <span className="text-white text-xs font-bold">BA</span>
         </div>
-        <div>
-          <span className="text-sm font-bold text-white tracking-tight block leading-tight">Binary Analyzer</span>
-        </div>
+        <span className="text-sm font-bold text-[#2b2824] tracking-tight">Binary Analyzer</span>
       </div>
 
       {/* Nav */}
@@ -34,10 +31,10 @@ export default function Sidebar() {
             key={to}
             to={to}
             className={({ isActive }) =>
-              `group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
+              `group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
               ${isActive
-                ? "bg-gradient-to-r from-cyan-500/15 to-transparent text-cyan-300 border-l-[2.5px] border-cyan-400 shadow-[0_0_12px_-4px_rgba(6,182,212,0.3)]"
-                : "text-slate-500 hover:text-slate-300 hover:bg-slate-800/40 border-l-[2.5px] border-transparent"
+                ? "bg-[#fce8e6] text-[#e8635a]"
+                : "text-[#787268] hover:text-[#2b2824] hover:bg-[#e5e1d8]"
               }`
             }
           >
@@ -48,22 +45,25 @@ export default function Sidebar() {
       </nav>
 
       {/* User row */}
-      <div className="px-3 py-4 border-t border-slate-800/60">
+      <div className="px-3 py-4 border-t border-[#d1ccc1]">
         <button
           onClick={() => navigate("/signin")}
-          className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg hover:bg-slate-800/40 transition-all duration-200 group"
+          className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-xl hover:bg-[#e5e1d8] transition-all duration-200 group"
         >
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-violet-600 flex items-center justify-center text-[11px] font-bold text-white shrink-0 shadow-lg shadow-violet-500/20">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#9b8ec4] to-[#7c6fad] flex items-center justify-center text-[11px] font-bold text-white shrink-0 shadow-sm">
             AN
           </div>
           <div className="flex-1 text-left">
-            <p className="text-xs font-medium text-slate-300 group-hover:text-white transition-colors">Analyst</p>
-            <p className="text-[9px] text-slate-600">Guest session</p>
+            <p className="text-xs font-medium text-[#2b2824] group-hover:text-[#e8635a] transition-colors">Analyst</p>
+            <p className="text-[9px] text-[#787268]">Guest session</p>
           </div>
-          <LogIn size={13} className="text-slate-600 group-hover:text-cyan-400 transition-colors" />
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#787268] group-hover:text-[#e8635a] transition-colors">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+            <polyline points="10 17 15 12 10 7" />
+            <line x1="15" y1="12" x2="3" y2="12" />
+          </svg>
         </button>
       </div>
-
     </aside>
   );
 }

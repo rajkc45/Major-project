@@ -1,78 +1,89 @@
 import { Link } from "react-router-dom";
-import { Upload, FileText, Info, ShieldAlert, Clock, Brain } from "lucide-react";
+import { Upload, FileText, Info, Clock, Sparkles } from "lucide-react";
+
+const doodle = [
+  "M20 40 Q40 20 60 40 T100 40",
+  "M0 80 Q25 60 50 80 T100 80",
+];
 
 export default function Home() {
   return (
-    <div className="min-h-screen p-6 space-y-6">
-
-      {/* Header */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6 card-glow card-glow-cyan">
-        <div className="flex items-center gap-3 mb-1">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 ring-1 ring-cyan-500/30 flex items-center justify-center">
-            <ShieldAlert size={16} className="text-cyan-400" />
+    <div className="space-y-6">
+      {/* Hero */}
+      <div className="relative overflow-hidden rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-8 blob-deco">
+        <svg className="absolute top-4 right-8 w-24 h-24 text-[#e8635a]/5" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.5">
+          {doodle.map((d, i) => <path key={i} d={d} strokeLinecap="round" />)}
+        </svg>
+        <div className="flex items-center gap-4 mb-2">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#e8635a] to-[#d4944a] flex items-center justify-center shadow-sm animate-float">
+            <Sparkles size={18} className="text-white" />
           </div>
-          <h1 className="text-xl font-bold text-white">Welcome back, <span className="gradient-text">Analyst</span></h1>
+          <div>
+            <h1 className="text-2xl font-bold text-[#2b2824]">
+              Hey there, <span className="text-[#e8635a]">Analyst</span>
+            </h1>
+            <p className="text-[#787268] text-sm mt-0.5">
+              Here's your Binary Analysis Platform at a glance.
+            </p>
+          </div>
         </div>
-        <p className="text-slate-400 text-sm mt-1 ml-11">
-          Here&apos;s a quick overview of your Binary Analysis Platform.
-        </p>
       </div>
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 stagger">
-        <div className="rounded-xl bg-[#0d1117] ring-1 ring-cyan-500/30 p-5 flex flex-col gap-3 card-glow card-glow-cyan group">
-          <div className="w-7 h-7 rounded-lg bg-cyan-500/10 ring-1 ring-cyan-500/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-            <Upload size={14} className="text-cyan-400" />
+        <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6 transition-all duration-200 hover:border-[#c4bfb4] hover:shadow-md hover:-translate-y-0.5">
+          <div className="w-9 h-9 rounded-xl bg-[#fce8e6] flex items-center justify-center mb-4">
+            <Upload size={16} className="text-[#e8635a]" />
           </div>
-          <p className="text-2xl font-bold text-white font-mono tracking-tight">12</p>
-          <p className="text-xs text-slate-400">Total Uploads</p>
-          <p className="text-xs text-cyan-400">+3 this week</p>
+          <p className="text-3xl font-bold text-[#2b2824] tracking-tight">12</p>
+          <p className="text-sm text-[#787268] mt-1">Total Uploads</p>
+          <p className="text-xs text-[#e8635a] mt-1">+3 this week</p>
         </div>
 
-        <div className="rounded-xl bg-[#0d1117] ring-1 ring-emerald-500/30 p-5 flex flex-col gap-3 card-glow card-glow-cyan group">
-          <div className="w-7 h-7 rounded-lg bg-emerald-500/10 ring-1 ring-emerald-500/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-            <FileText size={14} className="text-emerald-400" />
+        <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6 transition-all duration-200 hover:border-[#c4bfb4] hover:shadow-md hover:-translate-y-0.5">
+          <div className="w-9 h-9 rounded-xl bg-[#e4f2f2] flex items-center justify-center mb-4">
+            <FileText size={16} className="text-[#4a9e9e]" />
           </div>
-          <p className="text-2xl font-bold text-white font-mono tracking-tight">5</p>
-          <p className="text-xs text-slate-400">Reports Generated</p>
-          <p className="text-xs text-emerald-400">2 flagged critical</p>
+          <p className="text-3xl font-bold text-[#2b2824] tracking-tight">5</p>
+          <p className="text-sm text-[#787268] mt-1">Reports Generated</p>
+          <p className="text-xs text-[#4a9e9e] mt-1">2 flagged critical</p>
         </div>
 
-        <div className="rounded-xl bg-[#0d1117] ring-1 ring-violet-500/30 p-5 flex flex-col gap-3 card-glow card-glow-violet group">
-          <div className="w-7 h-7 rounded-lg bg-violet-500/10 ring-1 ring-violet-500/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-            <Brain size={14} className="text-violet-400" />
+        <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6 transition-all duration-200 hover:border-[#c4bfb4] hover:shadow-md hover:-translate-y-0.5">
+          <div className="w-9 h-9 rounded-xl bg-[#f0edf7] flex items-center justify-center mb-4">
+            <Sparkles size={16} className="text-[#9b8ec4]" />
           </div>
-          <p className="text-sm font-bold text-emerald-400 font-mono mt-1">● Active</p>
-          <p className="text-xs text-slate-400">System Status</p>
-          <p className="text-xs text-violet-400">All engines running</p>
+          <p className="text-sm font-bold text-[#4a9e9e] mt-1">Active</p>
+          <p className="text-sm text-[#787268] mt-1">System Status</p>
+          <p className="text-xs text-[#9b8ec4] mt-1">All engines running</p>
         </div>
       </div>
 
       {/* Quick Actions */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6 card-glow card-glow-cyan">
+      <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6">
         <div className="flex items-center gap-2 mb-5">
-          <Clock size={15} className="text-amber-400" />
-          <h2 className="text-sm font-semibold text-white">Quick Actions</h2>
+          <Clock size={15} className="text-[#d4944a]" />
+          <h2 className="text-sm font-semibold text-[#2b2824]">Quick Actions</h2>
         </div>
 
         <div className="flex flex-wrap gap-3">
           <Link
             to="/upload"
-            className="flex items-center gap-2 bg-cyan-500/10 text-cyan-400 ring-1 ring-cyan-500/30 px-4 py-2 rounded-lg text-sm font-medium hover:bg-cyan-500/20 hover:ring-cyan-500/50 transition-all duration-200"
+            className="inline-flex items-center gap-2 bg-[#fce8e6] text-[#e8635a] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#f8d5d1] transition-all"
           >
             <Upload size={14} /> Upload File
           </Link>
 
           <Link
             to="/reports"
-            className="flex items-center gap-2 bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/30 px-4 py-2 rounded-lg text-sm font-medium hover:bg-emerald-500/20 hover:ring-emerald-500/50 transition-all duration-200"
+            className="inline-flex items-center gap-2 bg-[#e4f2f2] text-[#4a9e9e] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#d4eaea] transition-all"
           >
             <FileText size={14} /> View Reports
           </Link>
 
           <Link
             to="/about"
-            className="flex items-center gap-2 bg-slate-500/10 text-slate-400 ring-1 ring-slate-500/30 px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-500/20 hover:ring-slate-500/50 transition-all duration-200"
+            className="inline-flex items-center gap-2 bg-[#e5e1d8] text-[#787268] px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-[#d1ccc1] transition-all"
           >
             <Info size={14} /> About System
           </Link>

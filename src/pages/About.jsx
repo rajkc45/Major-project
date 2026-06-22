@@ -1,23 +1,22 @@
-
-import { Code2, Server, Brain, ShieldAlert, CheckCircle2, AlertTriangle, XCircle, Cpu, Zap, Database } from "lucide-react";
+import { Code2, Server, Brain, Shield, CheckCircle2, AlertTriangle, XCircle, Cpu, Zap, Database, Sparkles } from "lucide-react";
 
 const STACK = [
   {
     label: "Frontend",
     icon: Code2,
-    accent: "cyan",
+    accent: "coral",
     items: ["React + Vite", "Tailwind CSS", "React Router v6", "Lucide Icons"],
   },
   {
     label: "Backend",
     icon: Server,
-    accent: "emerald",
+    accent: "teal",
     items: ["Node.js + Express", "C++ Disassembly Engine", "Capstone Framework", "REST API"],
   },
   {
     label: "AI Pipeline",
     icon: Brain,
-    accent: "violet",
+    accent: "lavender",
     items: ["n8n Orchestration", "OpenAI LLM", "Agentic Analysis", "De-obfuscation"],
   },
   {
@@ -39,31 +38,36 @@ const STATUS = [
 ];
 
 const accentCls = {
-  cyan:   { bg: "bg-cyan-500/10",   text: "text-cyan-400",   ring: "ring-cyan-500/30",   glow: "card-glow-cyan"   },
-  emerald:{ bg: "bg-emerald-500/10",text: "text-emerald-400",ring: "ring-emerald-500/30", glow: "card-glow-cyan"   },
-  violet: { bg: "bg-violet-500/10", text: "text-violet-400", ring: "ring-violet-500/30", glow: "card-glow-violet" },
-  amber:  { bg: "bg-amber-500/10",  text: "text-amber-400",  ring: "ring-amber-500/30",  glow: "card-glow-amber"  },
+  coral:   { bg: "bg-[#fce8e6]",   text: "text-[#e8635a]" },
+  teal:    { bg: "bg-[#e4f2f2]",   text: "text-[#4a9e9e]" },
+  lavender:{ bg: "bg-[#f0edf7]",   text: "text-[#9b8ec4]" },
+  amber:   { bg: "bg-[#faf0e0]",   text: "text-[#d4944a]" },
 };
 
 const statusMeta = {
-  done:    { Icon: CheckCircle2, cls: "text-emerald-400", bg: "bg-emerald-500/10 ring-emerald-500/20" },
-  warning: { Icon: AlertTriangle,cls: "text-amber-400",   bg: "bg-amber-500/10 ring-amber-500/20"    },
-  error:   { Icon: XCircle,      cls: "text-rose-400",    bg: "bg-rose-500/10 ring-rose-500/20"      },
+  done:    { Icon: CheckCircle2, cls: "text-[#4a9e9e]", bg: "bg-[#e4f2f2]" },
+  warning: { Icon: AlertTriangle,cls: "text-[#d4944a]", bg: "bg-[#faf0e0]" },
+  error:   { Icon: XCircle,      cls: "text-[#e8635a]", bg: "bg-[#fce8e6]" },
 };
 
 export default function About() {
   return (
-    <div className="min-h-screen p-6 space-y-6">
+    <div className="space-y-6">
 
       {/* Header */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6 card-glow card-glow-cyan">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 ring-1 ring-cyan-500/30 flex items-center justify-center">
-            <ShieldAlert size={16} className="text-cyan-400" />
+      <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-8 blob-deco">
+        <div className="flex items-center gap-4 mb-3">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#e8635a] to-[#d4944a] flex items-center justify-center animate-float">
+            <Sparkles size={18} className="text-white" />
           </div>
-          <h1 className="text-lg font-bold text-white">About This Project</h1>
+          <div>
+            <h1 className="text-xl font-bold text-[#2b2824]">About This Project</h1>
+            <p className="text-sm text-[#787268] mt-0.5">
+              The story behind the Binary Analysis Platform
+            </p>
+          </div>
         </div>
-        <p className="text-sm text-slate-400 leading-relaxed ml-11">
+        <p className="text-sm text-[#787268] leading-relaxed ml-[60px]">
           A Hybrid Binary Analysis Platform combining a C++ disassembly engine, n8n AI orchestration,
           and a React frontend for visualizing de-obfuscated binary code. Built as a final year project.
         </p>
@@ -71,22 +75,22 @@ export default function About() {
 
       {/* Tech Stack */}
       <div>
-        <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Tech Stack</h2>
+        <h2 className="text-xs font-semibold text-[#aba498] uppercase tracking-widest mb-3">Tech Stack</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 stagger">
           {STACK.map(({ label, icon: Icon, accent, items }) => {
             const a = accentCls[accent];
             return (
-              <div key={label} className={`rounded-xl bg-[#0d1117] ring-1 ${a.ring} p-5 flex flex-col gap-3 card-glow ${a.glow}`}>
-                <div className="flex items-center gap-2">
-                  <div className={`w-7 h-7 rounded-lg ${a.bg} ring-1 ${a.ring} flex items-center justify-center`}>
-                    <Icon size={14} className={a.text} />
+              <div key={label} className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6 transition-all hover:border-[#c4bfb4] hover:shadow-sm">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className={`w-8 h-8 rounded-xl ${a.bg} flex items-center justify-center`}>
+                    <Icon size={15} className={a.text} />
                   </div>
-                  <h3 className="text-sm font-semibold text-white">{label}</h3>
+                  <h3 className="text-sm font-semibold text-[#2b2824]">{label}</h3>
                 </div>
-                <ul className="flex flex-col gap-1.5">
+                <ul className="flex flex-col gap-2">
                   {items.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-xs text-slate-400">
-                      <span className={`w-1 h-1 rounded-full ${a.bg} ${a.text} inline-block`} />
+                    <li key={item} className="flex items-center gap-2 text-sm text-[#787268]">
+                      <span className={`w-1.5 h-1.5 rounded-full ${a.bg} ${a.text} inline-block`} />
                       {item}
                     </li>
                   ))}
@@ -99,20 +103,20 @@ export default function About() {
 
       {/* Project Status */}
       <div>
-        <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Project Status</h2>
-        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 overflow-hidden card-glow card-glow-cyan">
+        <h2 className="text-xs font-semibold text-[#aba498] uppercase tracking-widest mb-3">Project Status</h2>
+        <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] overflow-hidden">
           {STATUS.map(({ label, status, note }, i) => {
             const { Icon, cls, bg } = statusMeta[status];
             return (
               <div
                 key={label}
-                className={`flex items-center justify-between px-5 py-3.5 transition-colors hover:bg-slate-800/20 ${i !== STATUS.length - 1 ? "border-b border-slate-800/60" : ""}`}
+                className={`flex items-center justify-between px-6 py-3.5 transition-colors hover:bg-[#e2ded6] ${i !== STATUS.length - 1 ? "border-b border-[#d1ccc1]" : ""}`}
               >
                 <div className="flex items-center gap-3">
-                  <Cpu size={13} className="text-slate-600" />
-                  <span className="text-sm text-slate-300">{label}</span>
+                  <Cpu size={13} className="text-[#aba498]" />
+                  <span className="text-sm text-[#787268]">{label}</span>
                 </div>
-                <span className={`flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full ring-1 ${bg} ${cls}`}>
+                <span className={`flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full ${bg} ${cls}`}>
                   <Icon size={11} />
                   {note}
                 </span>
@@ -123,9 +127,9 @@ export default function About() {
       </div>
 
       {/* Footer note */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex items-start gap-3 card-glow card-glow-amber">
-        <Zap size={15} className="text-amber-400 mt-0.5 shrink-0" />
-        <p className="text-xs text-slate-500 leading-relaxed">
+      <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6 flex items-start gap-3">
+        <Zap size={15} className="text-[#d4944a] mt-0.5 shrink-0" />
+        <p className="text-sm text-[#787268] leading-relaxed">
           This platform is under active development as part of a final year university project.
           Features are being integrated incrementally — backend API and AI pipeline connections are coming next.
         </p>

@@ -1,18 +1,13 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
 
 export default function MainLayout() {
   return (
-    <div className="flex min-h-screen text-white">
-      <div className="ambient-orb" />
-      <Sidebar />
-      <div className="flex-1 ml-52 relative z-[1]">
-        <Navbar />
-        <main className="animate-fade-in">
-          <Outlet />
-        </main>
-      </div>
+    <div className="min-h-screen bg-[#e2ded6] text-[#2b2824]">
+      <Navbar />
+      <main className="max-w-6xl mx-auto px-4 py-6">
+        <Outlet />
+      </main>
     </div>
   );
 }

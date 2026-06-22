@@ -27,17 +27,17 @@ export default function Upload() {
   );
 
   return (
-    <div className="min-h-screen p-6 space-y-6">
+    <div className="space-y-6">
 
       {/* Header */}
-      <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-6 card-glow card-glow-cyan">
+      <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6 blob-deco">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 ring-1 ring-cyan-500/30 flex items-center justify-center">
-            <UploadIcon size={16} className="text-cyan-400" />
+          <div className="w-10 h-10 rounded-xl bg-[#fce8e6] flex items-center justify-center">
+            <UploadIcon size={18} className="text-[#e8635a]" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-white">Upload Binary</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Upload a binary file for analysis</p>
+            <h1 className="text-lg font-bold text-[#2b2824]">Upload Binary</h1>
+            <p className="text-sm text-[#787268] mt-0.5">Upload a binary file for analysis</p>
           </div>
         </div>
       </div>
@@ -47,65 +47,65 @@ export default function Upload() {
         {/* Upload Box */}
         <div className="lg:col-span-2 space-y-4">
           <label
-            className={`rounded-xl border-2 border-dashed transition-all duration-300 p-12 flex flex-col items-center justify-center cursor-pointer gap-4
+            className={`rounded-2xl border-2 border-dashed transition-all duration-300 p-12 flex flex-col items-center justify-center cursor-pointer gap-4
               ${drag
-                ? "border-cyan-400 bg-cyan-500/10 shadow-[0_0_30px_-8px_rgba(6,182,212,0.3)]"
-                : "border-slate-700 bg-[#0d1117] hover:border-slate-500 hover:bg-slate-800/30"
+                ? "border-[#e8635a] bg-[#fce8e6]"
+                : "border-[#d1ccc1] bg-[#f0ede7] hover:border-[#c4bfb4] hover:bg-[#e2ded6]"
               }`}
             onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
             onDragLeave={() => setDrag(false)}
             onDrop={handleDrop}
           >
             <input type="file" className="hidden" onChange={handleFileChange} />
-            <div className="w-14 h-14 rounded-full bg-cyan-500/10 ring-1 ring-cyan-500/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <UploadIcon size={24} className="text-cyan-400" />
+            <div className="w-16 h-16 rounded-2xl bg-[#fce8e6] flex items-center justify-center animate-float">
+              <UploadIcon size={28} className="text-[#e8635a]" />
             </div>
             <div className="text-center">
-              <p className="text-sm font-medium text-slate-300">
+              <p className="text-base font-medium text-[#2b2824]">
                 {drag ? "Drop it like it's hot" : "Drop your binary here"}
               </p>
-              <p className="text-xs text-slate-500 mt-1">or click to browse</p>
+              <p className="text-sm text-[#787268] mt-1">or click to browse</p>
             </div>
             <div className="flex items-center gap-2 mt-2">
               {[".elf", ".bin", ".pe", ".exe"].map((ext) => (
-                <span key={ext} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400">{ext}</span>
+                <span key={ext} className="text-[11px] font-mono px-2.5 py-1 rounded-lg bg-[#e5e1d8] text-[#787268]">{ext}</span>
               ))}
-              <span className="text-[10px] text-slate-500">· up to 50MB</span>
+              <span className="text-xs text-[#aba498]">· up to 50MB</span>
             </div>
           </label>
 
           {/* File preview */}
           {file && (
-            <div className={`rounded-xl p-4 flex items-center gap-3 ring-1 transition-all duration-200 ${isValidFile ? "bg-emerald-500/5 ring-emerald-500/20" : "bg-rose-500/5 ring-rose-500/20"}`}>
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isValidFile ? "bg-emerald-500/10" : "bg-rose-500/10"}`}>
-                <FileCode2 size={15} className={isValidFile ? "text-emerald-400" : "text-rose-400"} />
+            <div className={`rounded-2xl p-4 flex items-center gap-3 border transition-all duration-200 ${isValidFile ? "bg-[#e4f2f2] border-[#4a9e9e]/20" : "bg-[#fce8e6] border-[#e8635a]/20"}`}>
+              <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${isValidFile ? "bg-[#e4f2f2]" : "bg-[#fce8e6]"}`}>
+                <FileCode2 size={16} className={isValidFile ? "text-[#4a9e9e]" : "text-[#e8635a]"} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-slate-200 font-mono truncate">{file.name}</p>
-                <p className="text-xs text-slate-500">{(file.size / 1024).toFixed(2)} KB</p>
+                <p className="text-sm text-[#2b2824] font-mono truncate">{file.name}</p>
+                <p className="text-xs text-[#787268]">{(file.size / 1024).toFixed(2)} KB</p>
               </div>
               {isValidFile
-                ? <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
-                : <AlertTriangle size={16} className="text-rose-400 shrink-0" />
+                ? <CheckCircle2 size={16} className="text-[#4a9e9e] shrink-0" />
+                : <AlertTriangle size={16} className="text-[#e8635a] shrink-0" />
               }
-              <button onClick={() => setFile(null)} className="text-slate-600 hover:text-slate-300 transition-colors">
+              <button onClick={() => setFile(null)} className="text-[#aba498] hover:text-[#2b2824] transition-colors">
                 <X size={15} />
               </button>
             </div>
           )}
 
           {file && !isValidFile && (
-            <p className="text-xs text-rose-400 flex items-center gap-1">
+            <p className="text-xs text-[#e8635a] flex items-center gap-1">
               <AlertTriangle size={11} /> Unsupported file type. Please upload a .elf, .bin, .pe or .exe file.
             </p>
           )}
 
           <button
             disabled={!file || !isValidFile}
-            className={`w-full py-3 rounded-xl font-semibold text-sm transition-all duration-200
+            className={`w-full py-3 rounded-2xl font-semibold text-sm transition-all duration-200
               ${file && isValidFile
-                ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-[#080c10] hover:from-cyan-400 hover:to-cyan-500 shadow-lg shadow-cyan-500/20"
-                : "bg-slate-800 text-slate-600 cursor-not-allowed ring-1 ring-slate-700"
+                ? "bg-gradient-to-r from-[#e8635a] to-[#d4944a] text-white hover:shadow-md hover:-translate-y-0.5"
+                : "bg-[#e5e1d8] text-[#aba498] cursor-not-allowed"
               }`}
           >
             {file && isValidFile ? "Start Analysis" : "Select a valid binary to continue"}
@@ -113,30 +113,30 @@ export default function Upload() {
         </div>
 
         {/* Analysis Mode selector */}
-        <div className="rounded-xl bg-[#0d1117] ring-1 ring-slate-800 p-5 flex flex-col gap-4 h-fit card-glow card-glow-violet">
-          <h3 className="text-sm font-semibold text-white">Analysis Mode</h3>
+        <div className="rounded-2xl bg-[#f0ede7] border border-[#d1ccc1] p-6 flex flex-col gap-4 h-fit">
+          <h3 className="text-sm font-semibold text-[#2b2824]">Analysis Mode</h3>
           <div className="flex flex-col gap-2">
             {modes.map(({ id, desc }) => (
               <button
                 key={id}
                 onClick={() => setMode(id)}
-                className={`flex items-center gap-3 px-3 py-3 rounded-lg text-left transition-all duration-200 ring-1
+                className={`flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200
                   ${mode === id
-                    ? "bg-violet-500/10 ring-violet-500/40 shadow-[0_0_12px_-4px_rgba(139,92,246,0.3)]"
-                    : "bg-transparent ring-slate-800 hover:ring-slate-600"}`}
+                    ? "bg-[#f0edf7] text-[#9b8ec4]"
+                    : "bg-transparent text-[#787268] hover:bg-[#e5e1d8]"}`}
               >
-                <div className={`w-2 h-2 rounded-full ${mode === id ? "bg-violet-400" : "bg-slate-700"}`} />
+                <div className={`w-2 h-2 rounded-full ${mode === id ? "bg-[#9b8ec4]" : "bg-[#aba498]"}`} />
                 <div>
-                  <p className={`text-xs font-semibold ${mode === id ? "text-violet-300" : "text-slate-400"}`}>{id}</p>
-                  <p className="text-[10px] text-slate-600">{desc}</p>
+                  <p className={`text-xs font-semibold ${mode === id ? "text-[#9b8ec4]" : "text-[#787268]"}`}>{id}</p>
+                  <p className="text-[10px] text-[#aba498]">{desc}</p>
                 </div>
-                {mode === id && <CheckCircle2 size={13} className="ml-auto text-violet-400" />}
+                {mode === id && <CheckCircle2 size={13} className="ml-auto text-[#9b8ec4]" />}
               </button>
             ))}
           </div>
 
-          <div className="rounded-lg bg-slate-800/50 p-3 mt-2">
-            <p className="text-[10px] text-slate-500 leading-relaxed">
+          <div className="rounded-xl bg-[#e5e1d8] p-3 mt-2">
+            <p className="text-[11px] text-[#787268] leading-relaxed">
               {mode === "Standard" && "Disassembles the binary using Capstone and returns raw assembly output. Fastest mode."}
               {mode === "Enhanced" && "Builds a Control Flow Graph and applies pattern matching to detect common obfuscation techniques."}
               {mode === "Agentic"  && "Sends disassembly through the n8n pipeline to an LLM for full de-obfuscation and human-readable explanation."}
